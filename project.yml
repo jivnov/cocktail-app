@@ -1,0 +1,41 @@
+name: Cocktail
+options:
+  bundleIdPrefix: com.jivnov
+  createIntermediateGroups: true
+targets:
+  CocktailApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources: [CocktailApp]
+    info:
+      path: CocktailApp/Resources/Info.plist
+      properties:
+        PASSWORD: $(PASSWORD)
+        USER_NAME: $(USER_NAME)
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        UILaunchScreen_Generation: YES
+        UILaunchStoryboardName: LaunchScreen
+    configFiles:
+      Debug: CocktailApp/Resources/CocktailsSecrets.xcconfig
+      Release: CocktailApp/Resources/CocktailsSecrets.xcconfig
+    dependencies:
+      - target: CocktailNetworking
+  CocktailAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources: [CocktailAppTests]
+    info:
+      path: CocktailNetworking/Info.plist
+    dependencies:
+      - target: CocktailApp
+      - target: CocktailNetworking
+  CocktailNetworking:
+    info:
+      path: CocktailNetworking/Info.plist
+    type: library.static
+    platform: iOS
+    deploymentTarget: "15.0"
+    sources: [CocktailNetworking]
