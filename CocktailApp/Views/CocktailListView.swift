@@ -27,6 +27,9 @@ struct CocktailListView: View {
                 }
             }
             .navigationTitle("Cocktails")
+            .onAppear {
+                Task { await viewModel.fetchCocktails() }
+            }
             .onReceive(viewModel.$error) { error in
                 if let error = error {
                     currentErrorDescription = error

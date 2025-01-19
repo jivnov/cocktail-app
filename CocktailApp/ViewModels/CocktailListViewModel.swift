@@ -16,8 +16,6 @@ class CocktailListViewModel: ObservableObject {
 
     init(api: CocktailAPIProtocol) {
         self.api = api
-        
-        Task { await fetchCocktails() }
     }
     
     convenience init() {
